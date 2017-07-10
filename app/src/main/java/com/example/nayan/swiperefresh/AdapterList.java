@@ -23,7 +23,7 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
         this.context = context;
         mList = new MList();
         list = new ArrayList();
-        inflater=LayoutInflater.from(context);
+        inflater = LayoutInflater.from(context);
     }
 
     public void clear() {
@@ -47,7 +47,8 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         mList = list.get(position);
-        holder.txt.setText(mList.getTeam());
+        holder.title.setText(mList.getTeam());
+        holder.serial.setText(mList.getId() + "");
 
     }
 
@@ -58,11 +59,13 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txt;
+        TextView serial;
+        TextView title;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            txt = (TextView) itemView.findViewById(R.id.txt);
+            serial = (TextView) itemView.findViewById(R.id.serial);
+            title = (TextView) itemView.findViewById(R.id.title);
         }
     }
 

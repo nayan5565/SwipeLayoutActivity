@@ -5,6 +5,15 @@ package com.example.nayan.swiperefresh;
  */
 public class MList {
     private String team;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTeam() {
         return team;

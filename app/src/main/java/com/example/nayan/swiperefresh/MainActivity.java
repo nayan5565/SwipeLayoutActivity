@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -16,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<MList> list;
     AdapterList adapterList;
     private MList mList;
+    Gson gson;
 
     private SwipeRefreshLayout swipeContainer;
 
@@ -33,12 +36,15 @@ public class MainActivity extends AppCompatActivity {
         // Only ever call `setContentView` once right at the top
         setContentView(R.layout.activity_main);
         listView = (RecyclerView) findViewById(R.id.lvItems);
-
+        gson = new Gson();
         list = new ArrayList();
         mList = new MList();
         adapterList = new AdapterList(this);
-        display();
-        adapterList.addAll(list);
+        listView.setLayoutManager(new LinearLayoutManager(this));
+        listView.setAdapter(adapterList);
+
+//        display();
+//        adapterList.addAll(list);
         // Lookup the swipe container view
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
@@ -52,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
                 fetchTimelineAsync(0);
 
                 swipeContainer.setRefreshing(false);
-                mList=new MList();
-                mList.setTeam("c");
-                list.add(mList);
+//                mList = new MList();
+//                mList.setTeam("c");
+//                list.add(mList);
 
                 adapterList.addAll(list);
 
@@ -72,12 +78,13 @@ public class MainActivity extends AppCompatActivity {
         // `client` here is an instance of Android Async HTTP
         // getHomeTimeline is an example endpoint.
         AsyncHttpClient client = new AsyncHttpClient();
-        client.post("", new JsonHttpResponseHandler() {
+        client.post("http://api.androidhive.info/json/imdb_top_250.php?offset=0", new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
 
-                adapterList.addAll(list);
+                MList[] movieList = gson.fromJson(response.toString(), MList[].class);
+                list = new ArrayList<MList>(Arrays.asList(movieList));
             }
 
             @Override
@@ -87,18 +94,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void display() {
-        mList = new MList();
-        mList.setTeam("a");
-        list.add(mList);
-        mList = new MList();
-        mList.setTeam("b");
-        list.add(mList);
-
-        listView.setLayoutManager(new LinearLayoutManager(this));
-        listView.setAdapter(adapterList);
-
-    }
+//    private void display() {
+//        mList = new MList();
+//        mList.setTeam("a");
+//        list.add(mList);
+//        mList = new MList();
+//        mList.setTeam("b");
+//        list.add(mList);
+//
+//        listView.setLayoutManager(new LinearLayoutManager(this));
+//        listView.setAdapter(adapterList);
+//
+//    }
 
 
 }
