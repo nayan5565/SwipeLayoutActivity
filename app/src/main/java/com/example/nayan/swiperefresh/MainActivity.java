@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     AdapterList adapterList;
     private MList mList;
     Gson gson;
+    private int size = 0;
 
     private SwipeRefreshLayout swipeContainer;
 
@@ -55,14 +56,13 @@ public class MainActivity extends AppCompatActivity {
                 // Your code to refresh the list here.
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
-                fetchTimelineAsync(0);
+                fetchTimelineAsync();
 
                 swipeContainer.setRefreshing(false);
 //                mList = new MList();
-//                mList.setTeam("c");
+//                mList.setTitle("c");
 //                list.add(mList);
 
-                adapterList.addAll(list);
 
             }
         });
@@ -73,33 +73,45 @@ public class MainActivity extends AppCompatActivity {
                 android.R.color.holo_red_light);
     }
 
-    public void fetchTimelineAsync(int page) {
+    public void fetchTimelineAsync() {
+        Log.e("step", " one");
         // Send the network request to fetch the updated data
         // `client` here is an instance of Android Async HTTP
         // getHomeTimeline is an example endpoint.
+        size = list.size();
         AsyncHttpClient client = new AsyncHttpClient();
-        client.post("http://api.androidhive.info/json/imdb_top_250.php?offset=0", new JsonHttpResponseHandler() {
+        Log.e("step", " two");
+        client.post("http://api.androidhive.info/json/imdb_top_250.php?offset=" + size, new JsonHttpResponseHandler() {
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
 
                 MList[] movieList = gson.fromJson(response.toString(), MList[].class);
-                list = new ArrayList<MList>(Arrays.asList(movieList));
+
+                ArrayList<MList> movies=new ArrayList<MList>(Arrays.asList(movieList));
+               for (int i=0;i<movies.size();i++){
+                   list.add(movies.get(i));
+               }
+
+                adapterList.addAll(list);
+                Log.e("step", " one" + response);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 super.onFailure(statusCode, headers, responseString, throwable);
+                Log.e("step", " four");
             }
         });
     }
 
 //    private void display() {
 //        mList = new MList();
-//        mList.setTeam("a");
+//        mList.setTitle("a");
 //        list.add(mList);
 //        mList = new MList();
-//        mList.setTeam("b");
+//        mList.setTitle("b");
 //        list.add(mList);
 //
 //        listView.setLayoutManager(new LinearLayoutManager(this));

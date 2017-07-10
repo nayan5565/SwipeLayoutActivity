@@ -47,8 +47,8 @@ public class AdapterList extends RecyclerView.Adapter<AdapterList.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         mList = list.get(position);
-        holder.title.setText(mList.getTeam());
-        holder.serial.setText(mList.getId() + "");
+        holder.title.setText(mList.getTitle());
+        holder.serial.setText(mList.getRank() + "");
 
     }
 

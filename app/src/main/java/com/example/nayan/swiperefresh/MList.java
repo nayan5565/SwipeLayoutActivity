@@ -4,22 +4,22 @@ package com.example.nayan.swiperefresh;
  * Created by Nayan on 7/10/2017.
  */
 public class MList {
-    private String team;
-    private int id;
+    private String title;
+    private int rank;
 
-    public int getId() {
-        return id;
+    public int getRank() {
+        return rank;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 
-    public String getTeam() {
-        return team;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTeam(String team) {
-        this.team = team;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
