@@ -31,7 +31,7 @@ public class DataListActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.data_list);
         init();
         prepareDisplay();
-        getData();
+//        getData();
     }
 
     private void init() {
@@ -77,6 +77,7 @@ public class DataListActivity extends AppCompatActivity implements View.OnClickL
             deleteContact();
 
         } else if (v.getId() == R.id.btn_show) {
+            getData();
 
         }
 
@@ -87,19 +88,20 @@ public class DataListActivity extends AppCompatActivity implements View.OnClickL
         String value = edt_id.getText().toString();
         int id = Integer.valueOf(value);
         String name = edt_name.getText().toString();
-        result = db.addContuct(id, name, DatabaseHelper.TABLE_FRIENDS);
+//        result = db.addContuct(id, name, DatabaseHelper.TABLE_FRIENDS);
         mList.setRank(id);
         mList.setTitle(name);
-        mLists.add(mList);
-        adapterList.addAll(mLists);
 
-        if (result < 0) {
-            Toast.makeText(DataListActivity.this, "error " + result, Toast.LENGTH_SHORT).show();
+        db.addContuctToList(mList, DatabaseHelper.TABLE_FRIENDS);
 
-        } else {
-            Toast.makeText(DataListActivity.this, "success", Toast.LENGTH_SHORT).show();
-            getData();
-        }
+
+//        if (result < 0) {
+//            Toast.makeText(DataListActivity.this, "error " + result, Toast.LENGTH_SHORT).show();
+//
+//        } else {
+//            Toast.makeText(DataListActivity.this, "success", Toast.LENGTH_SHORT).show();
+//            getData();
+//        }
     }
 
     private void updateContact() {
@@ -133,7 +135,9 @@ public class DataListActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void getData() {
-        txt_lst.setText(db.getContuct());
+//        txt_lst.setText(db.getContuct());
+        mLists=db.getContuctFromList();
+        adapterList.addAll(mLists);
 
     }
 

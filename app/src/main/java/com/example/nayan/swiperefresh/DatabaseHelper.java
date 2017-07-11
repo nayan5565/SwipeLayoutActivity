@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Created by Nayan on 7/12/2017.
@@ -37,12 +40,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public long addContuct(int id, String name,String tableName) {
+    public long addContuct(int id, String name, String tableName) {
         long result;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ID, id);
         values.put(KEY_NAME, name);
+
+        result = db.insert(tableName, null, values);
+
+        return result;
+    }
+
+    public long addContuctToList(MList mList, String tableName) {
+        long result;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, mList.getRank());
+        values.put(KEY_NAME, mList.getTitle());
 
         result = db.insert(tableName, null, values);
 
@@ -66,20 +81,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public String getContuct() {
-        String result="";
+        String result = "";
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "select * from " + TABLE_FRIENDS;
 
         Cursor cursor = db.rawQuery(sql, null);
-        if (cursor != null && cursor.getCount()>0) {
+        if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             do {
                 String id = cursor.getString(cursor.getColumnIndex(KEY_ID));
                 String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
-                result = result+id+" "+name+"\n";
+                result = result + id + " " + name + "\n";
 
             } while (cursor.moveToNext());
         }
         return result;
     }
+
+    public ArrayList<MList> getContuctFromList() {
+        ArrayList<MList> levelArrayList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        MList mLevel;
+        String sql = "select * from " + TABLE_FRIENDS;
+        Cursor cursor = db.rawQuery(sql, null);
+        Log.e("cursor", "count :" + cursor.getCount());
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                Log.e("do", "start");
+                mLevel = new MList();
+                mLevel.setRank(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
+                mLevel.setTitle(cursor.getString(cursor.getColumnIndex(KEY_NAME)));
+
+                levelArrayList.add(mLevel);
+                Log.e("do", "end");
+            } while (cursor.moveToNext());
+            cursor.close();
+
+        }
+        return levelArrayList;
+    }
 }
+
