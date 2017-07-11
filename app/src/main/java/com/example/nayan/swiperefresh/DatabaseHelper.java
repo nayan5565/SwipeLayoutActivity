@@ -71,7 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String sql = "select * from " + TABLE_FRIENDS;
 
         Cursor cursor = db.rawQuery(sql, null);
-        if (cursor != null ) {
+        if (cursor != null && cursor.getCount()>0) {
             cursor.moveToFirst();
             do {
                 String id = cursor.getString(cursor.getColumnIndex(KEY_ID));
