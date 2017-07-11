@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText edtPass, edtUser;
     String pass, user;
-    Button login;
+    Button login, btnData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,22 +24,40 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         edtPass = (EditText) findViewById(R.id.pass);
         edtUser = (EditText) findViewById(R.id.userName);
         login = (Button) findViewById(R.id.btn);
+        btnData = (Button) findViewById(R.id.btn2);
         login.setOnClickListener(this);
+        btnData.setOnClickListener(this);
 
 
     }
 
     @Override
     public void onClick(View v) {
-        user = edtUser.getText().toString().trim();
-        pass = edtPass.getText().toString().trim();
+        if (v.getId()==R.id.btn){
+            user = edtUser.getText().toString().trim();
+            pass = edtPass.getText().toString().trim();
 
-        if (user.equals("nayan") && pass.equals("555965")) {
-            Toast.makeText(this, "correct", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "wrong", Toast.LENGTH_SHORT).show();
+            if (user.equals("nayan") && pass.equals("555965")) {
+                Toast.makeText(this, "correct", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "wrong", Toast.LENGTH_SHORT).show();
+            }
         }
+
+        else if (v.getId()==R.id.btn2){
+            user = edtUser.getText().toString().trim();
+            pass = edtPass.getText().toString().trim();
+
+            if (user.equals("nayan") && pass.equals("555965")) {
+                Toast.makeText(this, "correct", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, DataListActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "wrong", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 }

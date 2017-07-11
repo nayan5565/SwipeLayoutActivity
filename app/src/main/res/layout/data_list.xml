@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_op"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="use button which need"
+        android:layout_gravity="center"
+        android:background="#f00"/>
+
+    <EditText
+        android:id="@+id/edt_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="input id" />
+
+    <EditText
+        android:id="@+id/edt_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="input name" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#0cc">
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:textColor="#00f"/>
+
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:textColor="#ff0"/>
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ff0"
+            android:text="Delete"
+            android:textColor="#0f0"/>
+
+        <Button
+            android:id="@+id/btn_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show"
+            android:textColor="#0ff"/>
+
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/txt_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>
