@@ -1,5 +1,6 @@
-package com.example.nayan.swiperefresh;
+package com.example.nayan.swiperefresh.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.nayan.swiperefresh.adapter.AdapterList;
+import com.example.nayan.swiperefresh.utils.DatabaseHelper;
+import com.example.nayan.swiperefresh.model.MList;
+import com.example.nayan.swiperefresh.R;
 
 import java.util.ArrayList;
 
@@ -77,7 +83,9 @@ public class DataListActivity extends AppCompatActivity implements View.OnClickL
             deleteContact();
 
         } else if (v.getId() == R.id.btn_show) {
-            getData();
+//            getData();
+            Intent intent = new Intent(DataListActivity.this, GetDataFromDatabaseActivity.class);
+            startActivity(intent);
 
         }
 
@@ -136,7 +144,7 @@ public class DataListActivity extends AppCompatActivity implements View.OnClickL
 
     private void getData() {
 //        txt_lst.setText(db.getContuct());
-        mLists=db.getContuctFromList();
+        mLists = db.getContuctFromList();
         adapterList.addAll(mLists);
 
     }

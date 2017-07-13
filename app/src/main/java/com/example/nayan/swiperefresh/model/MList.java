@@ -1,4 +1,4 @@
-package com.example.nayan.swiperefresh;
+package com.example.nayan.swiperefresh.model;
 
 /**
  * Created by Nayan on 7/10/2017.

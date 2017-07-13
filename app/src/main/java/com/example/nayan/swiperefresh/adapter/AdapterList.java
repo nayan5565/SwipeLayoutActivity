@@ -1,4 +1,4 @@
-package com.example.nayan.swiperefresh;
+package com.example.nayan.swiperefresh.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.nayan.swiperefresh.R;
+import com.example.nayan.swiperefresh.model.MList;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.nayan.swiperefresh;
+package com.example.nayan.swiperefresh.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.nayan.swiperefresh.R;
 
 /**
  * Created by Nayan on 7/11/2017.
